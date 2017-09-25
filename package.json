@@ -32,8 +32,7 @@
     "nodemon": "1.11.0",
     "preact": "^8.2.5",
     "semantic-release": "6.3.2",
-    "typescript": "2.3.3",
-    "typescript-formatter": "5.2.0",
+    "typescript": "2.5.2",
     "validate-commit-msg": "2.12.1",
     "watchman": "0.1.8",
     "yargs": "^8.0.2"
@@ -48,6 +47,7 @@
   "main": "node/index.js",
   "module": "es/index.js",
   "esnext": "esnext/index.js",
+  "types": "src/index.d.ts",
   "scripts": {
     "build:es": "babel --no-babelrc src --out-dir es --presets=$(pwd)/config/babel.es",
     "build:esnext": "babel --no-babelrc src --out-dir esnext --presets=$(pwd)/config/babel.esnext",
@@ -92,7 +92,6 @@
     "type": "git",
     "url": "https://github.com/skatejs/skatejs"
   },
-  "types": "src/index.d.ts",
   "keywords": [
     "components",
     "custom",

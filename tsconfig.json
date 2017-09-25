@@ -13,15 +13,16 @@
     "strict": true,
     "sourceMap": true,
     "moduleResolution": "node",
-    "declaration": true,
+    // TODO @hotell
+    // "declaration": true,
     "jsx": "react",
-    "jsxFactory": "skate.h",
+    "jsxFactory": "h",
     "pretty": true,
     "outDir": "ts-output"
   },
   "include": [
     "src/index.d.ts",
-    "src/ts-typings/*",
+    "src/ts-types/*",
     "test/definitions/**/*.tsx"
   ],
   "exclude": [
