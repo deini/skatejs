@@ -1,11 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es2015",
-    "target": "es2017",
-    "lib": [
-      "dom",
-      "es2017"
-    ],
+    "target": "esnext",
     "baseUrl": "./",
     "paths": {
       "skatejs": ["./"]
@@ -18,12 +13,12 @@
     "jsx": "react",
     "jsxFactory": "h",
     "pretty": true,
-    "outDir": "ts-output"
+    "noEmit": true
   },
   "include": [
     "src/index.d.ts",
     "src/ts-types/*",
-    "test/definitions/**/*.tsx"
+    "test/ts"
   ],
   "exclude": [
     "node_modules"

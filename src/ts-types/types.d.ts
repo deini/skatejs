@@ -8,16 +8,18 @@ export type ComponentProps<El, T> = { [P in keyof T]: PropOptions }
 // NOTE:
 // - all classes are just ambient definitions (opaque types like), so consumer cannot use them directly
 // - inferring generics work only on instances, not on implementation type. So this will not give you type safety, you still have to manually annotate those props in your code
-export declare class Component<P = Mixed> extends HTMLElement {
-  // Custom Elements v1
+
+// Custom Elements v1
+export class CustomElement extends HTMLElement {
   static readonly observedAttributes: string[]
   connectedCallback(): void
   disconnectedCallback(): void
   attributeChangedCallback(name: string, oldValue: null | string, newValue: null | string): void
   adoptedCallback(): void
 }
+export declare class Component<P = Mixed> extends CustomElement {}
 
-export declare class Children<P = Mixed> extends HTMLElement {
+export declare class Children<P = Mixed> extends CustomElement {
   childrenChangedCallback(): void
 }
 
@@ -25,7 +27,7 @@ export declare class Children<P = Mixed> extends HTMLElement {
  * Implement this interface for any @skatejs/renderer-*
  */
 export interface Renderer<P, O> {
-  renderCallback(props?: P): O
+  renderCallback?(props?: P): O
 
   // called after render
   renderedCallback?(): void
@@ -33,7 +35,7 @@ export interface Renderer<P, O> {
   rendererCallback(shadowRoot: Element, renderCallback: () => O): void
 }
 
-export declare class Render<P = Mixed, O = Mixed> extends HTMLElement implements Renderer<P, O> {
+export declare class Render<P = Mixed, O = Mixed> extends CustomElement implements Renderer<P, O> {
   // getter for turning of ShadowDOM
   readonly renderRoot?: this | Mixed
 
@@ -45,7 +47,7 @@ export declare class Render<P = Mixed, O = Mixed> extends HTMLElement implements
   rendererCallback(shadowRoot: Element, renderCallback: () => O): void
 }
 
-export declare class Props<P = Mixed> extends HTMLElement {
+export declare class Props<P = Mixed> extends CustomElement {
   // Special hack for own components type checking.
   // It works in combination with ElementAttributesProperty. It placed in jsx.d.ts.
   // more detail, see: https://www.typescriptlang.org/docs/handbook/jsx.html
@@ -61,7 +63,7 @@ export declare class Props<P = Mixed> extends HTMLElement {
   propsUpdatedCallback(next: P, prev: P): boolean | void
 }
 
-export declare class Unique extends HTMLElement {
+export declare class Unique extends CustomElement {
   static is: string
 }
 
