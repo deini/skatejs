@@ -1,18 +1,19 @@
-import * as skate from 'skatejs'
-import { h, Component, define } from 'skatejs'
+import { withComponent, define } from 'skatejs'
 
-export type Props = {}
-export class MyComponent extends Component<Props> {
-  static get is() { return 'my-cmp' }
+const withRenderer = () => class extends HTMLElement {}
+export const Component = withComponent(withRenderer())
+
+export class MyComponent extends Component {
+  static readonly is = 'my-cmp'
   get renderRoot() {
     return this
   }
   renderCallback() {
-    return (
+    return `
       <div>
         <h1>Hello World</h1>
       </div>
-    )
+    `
   }
 }
 

@@ -1,18 +1,19 @@
+import { h } from 'preact'
 import * as skate from 'skatejs'
-import { h, Component, props, define, PropOptions } from 'skatejs'
+import { withComponent, props, define, PropOptions } from 'skatejs'
+
+export const Component = withComponent()
 
 export type Props = {
-  myArray: string[],
-  myBoolean: boolean,
+  myArray: string[]
+  myBoolean: boolean
 }
 
 export class MyComponent extends Component<Props> {
-  static get is() { return 'my-cmp' }
-  static get props() {
-    return {
-      myArray: props.array,
-      myBoolean: props.boolean
-    }
+  static readonly is = 'my-cmp'
+  static readonly props = {
+    myArray: props.array,
+    myBoolean: props.boolean,
   }
   myBoolean: boolean
   myArray: string[]
@@ -23,13 +24,15 @@ export class MyComponent extends Component<Props> {
   }
 
   private _changeProps() {
-    this.props = { myBoolean: true }
+    // as Props casting is needed as there is absolutely no way how to differently create
+    // type definitions for setter and getter
+    this.props = { myBoolean: true } as Props
     // or just directly
     this.myBoolean = true
 
     console.log(this.props) // { myArray: [], myBoolean: true }
 
-    this.props = { myArray: ['hello'] }
+    this.props = { myArray: ['hello'] } as Props
     // or just directly
     this.myArray = ['hello']
 

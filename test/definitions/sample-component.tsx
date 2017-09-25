@@ -1,46 +1,51 @@
-import * as skate from 'skatejs';
-import { Component } from 'skatejs';
+import { h, FunctionalComponent as SFC, ComponentProps as PreactComponentProps } from 'preact'
+import { props, withComponent, ComponentProps } from 'skatejs'
 
-export type NumLiteral = 123 | 124 | 125;
-export type StrLiteral = 'one' | 'two' | 'three';
-export type SkateType = { trucks: string, deck: string }
+const Component = withComponent()
+
+export type NumLiteral = 123 | 124 | 125
+export type StrLiteral = 'one' | 'two' | 'three'
+export type SkateType = { trucks: string; deck: string }
 export interface CountUpProps {
-  count?: number;
-  num?: number,
-  numLiteral?: NumLiteral,
-  str?: string,
-  strLiteral?: StrLiteral,
-  bool?: boolean,
-  arr?: string[],
-  obj?: SkateType,
+  count?: number
+  num?: number
+  numLiteral?: NumLiteral
+  str?: string
+  strLiteral?: StrLiteral
+  bool?: boolean
+  arr?: string[]
+  obj?: SkateType
 }
 
-export class CountUpComponent extends skate.Component<CountUpProps> {
-  static get is() { return 'x-countup' }
-  static get props(): skate.ComponentProps<CountUpComponent, CountUpProps> {
+export class CountUpComponent extends Component<CountUpProps> {
+  static get is() {
+    return 'x-countup'
+  }
+  static get props(): ComponentProps<CountUpComponent, CountUpProps> {
     return {
       count: {
-        ...skate.props.number, ...{
+        ...props.number,
+        ...{
           attribute: true,
           default(elem: HTMLElement, data: Object) {
-            return 7;
+            return 7
           },
-        }
+        },
       },
-      num: skate.props.number,
-      numLiteral: skate.props.number,
-      str: skate.props.string,
-      strLiteral: skate.props.string,
-      bool: skate.props.boolean,
-      arr: skate.props.array,
-      obj: skate.props.object,
+      num: props.number,
+      numLiteral: props.number,
+      str: props.string,
+      strLiteral: props.string,
+      bool: props.boolean,
+      arr: props.array,
+      obj: props.object,
     }
   }
 
-  count: number;
+  count: number
 
   click() {
-    this.count += 1;
+    this.count += 1
   }
 
   renderCallback() {
@@ -49,67 +54,72 @@ export class CountUpComponent extends skate.Component<CountUpProps> {
         <CounterOutput count={this.count} />
         <Button onClick={e => this.click()}>Count up</Button>
       </div>
-    );
+    )
   }
 }
-customElements.define(CountUpComponent.is, CountUpComponent);
+customElements.define(CountUpComponent.is, CountUpComponent)
 
-
-type SkateParkProps = { year: number, halfPipe: boolean }
-class SkatePark extends Component<SkateParkProps>{
-  static get is() { return 'my-skate-park' }
+type SkateParkProps = { year: number; halfPipe: boolean }
+class SkatePark extends Component<SkateParkProps> {
+  static get is() {
+    return 'my-skate-park'
+  }
   static get props(): skate.ComponentProps<SkatePark, SkateParkProps> {
     return {
-      year: skate.props.number,
-      halfPipe: skate.props.boolean,
+      year: props.number,
+      halfPipe: props.boolean,
     }
   }
   renderCallback({ halfPipe, year }: SkateParkProps) {
-    const halfPipeInfo = <span>{halfPipe ? 'has' : 'doesnt have'}</span>;
+    const halfPipeInfo = <span>{halfPipe ? 'has' : 'doesnt have'}</span>
     return (
       <div>
-        <p>Skate park exists since {year} and it {halfPipe} Half-Pipe</p>
+        <p>
+          Skate park exists since {year} and it {halfPipe} Half-Pipe
+        </p>
       </div>
     )
   }
 }
-customElements.define(SkatePark.is, SkatePark);
+customElements.define(SkatePark.is, SkatePark)
 
-customElements.define('x-app', class extends skate.Component<{}> {
-  renderCallback() {
-    return (
-      <div>
-        <h1>app</h1>
-        {skate.h('x-countup', { count: 100, obj: { trucks: 'Independent', deck: 'ZERO' } })}
-      </div>
-    );
+customElements.define(
+  'x-app',
+  class extends Component {
+    renderCallback() {
+      return (
+        <div>
+          <h1>app</h1>
+          {h('x-countup', { count: 100, obj: { trucks: 'Independent', deck: 'ZERO' } })}
+        </div>
+      )
+    }
   }
-});
+)
 
-export type ElmProps = { str: string; arr: any[]; };
-class Elem extends skate.Component<ElmProps> {
-  static get props(): skate.ComponentProps<Elem, ElmProps> {
+export type ElmProps = { str: string; arr: any[] }
+class Elem extends Component<ElmProps> {
+  static get props(): ComponentProps<Elem, ElmProps> {
     return {
-      str: skate.props.string,
-      arr: skate.props.array
+      str: props.string,
+      arr: props.array,
     }
   }
 
-  str: string;
-  arr: string[];
+  str: string
+  arr: string[]
 
   renderCallback() {
-    return skate.h('div', {}, 'testing');
+    return h('div', {}, 'testing')
   }
 }
 
+type ButtonProps = PreactComponentProps<any> & { onClick: (e: MouseEvent) => void }
+const Button = ({ onClick, children }: ButtonProps) => <button onClick={onClick}>{children}</button>
 
-type ButtonProps = { onClick: (e: MouseEvent) => void };
-const Button: skate.SFC<ButtonProps> = ({ onClick }, children: any) => (
-  <button onClick={onClick}>{children}</button>
-);
-
-type CounterOutputProps = { count: number };
-const CounterOutput: skate.SFC<CounterOutputProps> = (props) => (
-  <p>Count: <span>{props.count}</span></p>
-);
+type CounterOutputProps = PreactComponentProps<any> & { count: number }
+const CounterOutput = (props: CounterOutputProps) => (
+  <p>
+    Count: <span>{props.count}</span>
+  </p>
+)
