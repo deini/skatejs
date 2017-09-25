@@ -10,7 +10,7 @@ export type ComponentProps<El, T> = { [P in keyof T]: PropOptions }
 // - inferring generics work only on instances, not on implementation type. So this will not give you type safety, you still have to manually annotate those props in your code
 
 // Custom Elements v1
-export class CustomElement extends HTMLElement {
+export declare class CustomElement extends HTMLElement {
   static readonly observedAttributes: string[]
   connectedCallback(): void
   disconnectedCallback(): void
