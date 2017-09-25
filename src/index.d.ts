@@ -1,21 +1,12 @@
+// Type definitions for skatejs@5.0.0-beta.3
+// Project: https://github.com/skatejs/skatejs
+// TypeScript Version: 2.5
+
 // UMD library
-export as namespace skate;
+export as namespace skate
 
 // Public API
-export {
-  Component,
-  ComponentProps,
-  PropOptions,
-  StatelessComponent,
-  ComponentClass,
-  SFC,
-  prop,
-  props,
-  link,
-  define,
-  emit,
-  withComponent,
-  withProps,
-  withRenderer,
-  withUnique
-} from "./ts-typings/api";
+export { prop, props, link, define, emit, withComponent, withProps, withRender, withUnique } from './ts-types/api'
+
+// Public types ( Unfortunately TS doesn't has Opaque Types like Flow )
+export { ComponentProps, PropOptions, Renderer } from './ts-types/types'
