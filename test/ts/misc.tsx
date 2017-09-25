@@ -1,6 +1,6 @@
 const h = preact.h
 
-const { withComponent, emit, link } = skate
+const { withComponent, emit, link, define } = skate
 type ComponentProps<E, T> = skate.ComponentProps<E, T>
 type PreactComponentProps = preact.ComponentProps<any>
 type SFC<P> = P & PreactComponentProps
@@ -350,7 +350,7 @@ const Component = withComponent()
   // NONE
 }
 {
-  const Ctor1 = skate.define(
+  const Ctor1 = define(
     class extends HTMLElement {
       static is = 'x-test-1'
       private _who: string
@@ -366,13 +366,13 @@ const Component = withComponent()
   const pureElemenInst = new Ctor1()
   console.log(pureElemenInst.who)
 
-  const Ctor2 = skate.define(
+  const Ctor2 = define(
     class extends HTMLElement {
       static is = 'x-test-2'
     }
   )
 
-  const SkateCtor = skate.define(
+  const SkateCtor = define(
     class extends Component<{ who: string }> {
       static get is() {
         return 'my-skate'

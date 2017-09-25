@@ -1,5 +1,4 @@
 import { h } from 'preact'
-import * as skate from 'skatejs'
 import { withComponent, props, define, PropOptions } from 'skatejs'
 
 export const Component = withComponent()

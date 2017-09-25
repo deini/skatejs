@@ -38,4 +38,3 @@ export class MaterialInput extends InputComponent<InputProps> {
 }
 
 define(MaterialInput)
-//
